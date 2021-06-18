@@ -1,2 +1,2 @@
 # argocd-helm-secrets
-ArgoCD with helm-secrets support
+Docker and helm-charts for ArgoCD with helm-secrets support
