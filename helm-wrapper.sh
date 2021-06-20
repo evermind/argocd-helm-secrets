@@ -1,11 +1,18 @@
 #!/bin/sh
 
-GPG_KEY='/home/argocd/gpg/gpg.asc'
-
-if [ -f ${GPG_KEY} ]
-then     
-    gpg --quiet --import ${GPG_KEY}
+# import all keys found in dir
+GPG_IMPORT_DIR='/home/argocd/gpg'
+if [ -z "$(ls -A ${GPG_IMPORT_DIR}" ]; then
+   gpg --quiet --import ${GPG_IMPORT_DIR}/*
 fi
+
+
+# GPG_KEY='/home/argocd/gpg/gpg.asc'
+# if [ -f ${GPG_KEY} ]
+# then     
+#     gpg --quiet --import ${GPG_KEY}
+# fi
+
 
 # helm secrets only supports a few helm commands
 if [ $1 = "template" ] || [ $1 = "install" ] || [ $1 = "upgrade" ] || [ $1 = "lint" ] || [ $1 = "diff" ]
