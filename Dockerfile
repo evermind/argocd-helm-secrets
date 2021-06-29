@@ -15,12 +15,13 @@ RUN apt-get clean
 RUN rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* && \
     curl -o /usr/local/bin/sops -L https://github.com/mozilla/sops/releases/download/${SOPS_VERSION}/sops-${SOPS_VERSION}.linux && \
     chmod +x /usr/local/bin/sops 
+
+RUN helm plugin install https://github.com/jkroepke/helm-secrets --version ${HELM_SECRETS_VERSION}
 RUN cd /usr/local/bin && \
     mv helm helm.bin && \
     mv helm2 helm2.bin && \
     mv helm-wrapper.sh helm && \
     ln helm helm2 && \
     chmod +x helm helm2
-USER argocd
-RUN helm plugin install https://github.com/jkroepke/helm-secrets --version ${HELM_SECRETS_VERSION}
 
+USER argocd

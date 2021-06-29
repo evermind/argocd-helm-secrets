@@ -2,7 +2,7 @@
 
 # import all keys found in dir
 GPG_IMPORT_DIR='/home/argocd/gpg'
-if [ -z "$(ls -A ${GPG_IMPORT_DIR}" ]; then
+if [ -z "$(ls -A ${GPG_IMPORT_DIR})" ]; then
    gpg --quiet --import ${GPG_IMPORT_DIR}/*
 fi
 
