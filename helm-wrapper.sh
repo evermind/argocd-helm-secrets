@@ -4,27 +4,20 @@
 GPG_IMPORT_DIR='/home/argocd/gpg'
 GPG_MODE=false
 
-# only for debugging, remove it later on
-LOGFILE=/home/argocd/helmwrapper.log 
-
 # do not write other informations than deployment yaml
 export HELM_SECRETS_QUIET=true
 
 if [ -d ${GPG_IMPORT_DIR} ] 
 then
-   echo "gpg import" >> $LOGFILE
    gpg --quiet --import ${GPG_IMPORT_DIR}/*
    if [ $? -eq 0 ]; then
       GPG_MODE=true
    fi
 fi
 
-# echo "GPG_MODE is $GPG_MODE" >> $LOGFILE
-
 # helm secrets only supports a few helm commands
 if [ $GPG_MODE = true ]
 then
-    echo "helm command is $1" >> $LOGFILE
     if  [ $1 = "template" ] || [ $1 = "install" ] || [ $1 = "upgrade" ] || [ $1 = "lint" ] || [ $1 = "diff" ] 
     then 
         # Helm secrets add some useless outputs to every commands including template, namely
@@ -40,7 +33,6 @@ then
             # printf '%s\n' "$out" | sed -E "/^removed '.+\.dec'$/d"
             # since HELM_SECRETS_QUIET=true the hack above should not be needed anymore
             printf '%s\n' "$out"
-            echo "printf and exit 0" >> $LOGFILE
             exit 0
         else
             exit $code

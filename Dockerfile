@@ -23,8 +23,9 @@ RUN cd /usr/local/bin && \
     ln helm helm2 && \
     chmod +x helm helm2
 
+# install plugin for argocd user
 USER argocd
-
+# set HELM_PLUGINS makes sure that plugin is found later on by helm
 ENV HELM_PLUGINS="/home/argocd/.local/share/helm/plugins/"
 RUN helm.bin plugin install https://github.com/jkroepke/helm-secrets --version ${HELM_SECRETS_VERSION}
 
