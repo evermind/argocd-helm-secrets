@@ -7,6 +7,9 @@ GPG_MODE=false
 # only for debugging, remove it later on
 LOGFILE=~/helmwrapper.log 
 
+# do not write other informations than deployment yaml
+export HELM_SECRETS_QUIET=true
+
 if [ -d ${GPG_IMPORT_DIR} ] 
 then
    echo "gpg import" >> $LOGFILE
