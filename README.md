@@ -7,6 +7,9 @@ inspired by
 
 Version is equal to used arcocd base image.
 
+Releases at https://hub.docker.com/r/evermind/argocd-helm-secrets
+Use image `evermind/argocd-helm-secrets:{version}` for your deployment.
+
 ## Features
 * based on official docker from https://github.com/argoproj/argo-cd/
 * support SOPS encrypted files in helm charts
@@ -17,9 +20,9 @@ Version is equal to used arcocd base image.
 
 ## Components
 * argocd
-* helm secrets plugin https://github.com/jkroepke/helm-secrets
+* helm secrets plugin <https://github.com/jkroepke/helm-secrets>
 * gpg
-* sops
+* sops <https://github.com/mozilla/sops/releases/tag/v3.7.1>
 
 ## Hints / lesson learned
 
@@ -31,7 +34,7 @@ Version is equal to used arcocd base image.
 values.yaml
 ```
 global:
-  # abweichendes repo für integration des helm secrets plugin
+  # different repo for integration of helm secrets plugin
   image:
     repository: evermind/argocd-helm-secrets
     tag: "latest"
